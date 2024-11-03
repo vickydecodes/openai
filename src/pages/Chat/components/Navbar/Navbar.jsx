@@ -63,8 +63,8 @@ export default function Navbar({ username }) {
   };
   return (
     <div>
-      <nav className="navbar sticky-top pt-3 w-100 d-flex flex-row justify-content-center align-items-center">
-        <div className="container-fluid row " style={{width: '100%'}}>
+      <nav className="navbar sticky-top w-100 d-flex flex-row justify-content-center align-items-center">
+        <div className="container-fluid row mt-4" style={{width: '100%'}}>
           <div className="col-5 d-flex justify-content-start align-items-center">
             <button
               data-bs-toggle="offcanvas"
