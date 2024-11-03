@@ -20,7 +20,6 @@ export async function getOpenAIResponse() {
             ],
         });
 
-        console.log(completion.choices[0].message.content);
     } catch (error) {
         console.error("Error fetching OpenAI response:", error);
     }

@@ -44,7 +44,6 @@ export const AiProvider = ({ children }) => {
     setLoading(true);
     try {
       const chat = getChatById(id);
-      console.log("chat from getresponse func", chat);
       const userPrompt = prompt;
       const aiResponse = await getGeminiAiResponse(userPrompt);
       const newChat = {
@@ -85,7 +84,6 @@ export const AiProvider = ({ children }) => {
       ],
     };
     setChats((prevChats) => [...prevChats, newChat]);
-    console.log(chats);
   };
 
   const getChatById = (id) => {

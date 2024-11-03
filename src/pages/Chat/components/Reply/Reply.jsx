@@ -12,12 +12,12 @@ export default function Reply({ response, isLastMsg }) {
         <img
           src="/chatgptIcon.png"
           className=""
-          style={{ width: "25px", height: "25px" }}
+          style={{ width: "25px", height: "25px", marginRight: '20px' }}
           alt=""
         />
       </div>
-      <div className="col-11 reply-box">
-        {loading ? (
+      <div className="col-11 px-4 reply-box">
+        {loading && isLastMsg? (
           <p> {" "}
           <Typewriter
             words={["Loading..........."]}

@@ -21,7 +21,6 @@ export default function Chat() {
   const { id } = useParams();
 
   const handleSubmit = async (prompt) => {
-    console.log(id);
     getResponseFromAi(id, prompt);
   };
 
@@ -31,7 +30,6 @@ export default function Chat() {
 
   const chatFromParams = getChatById(id);
 
-  console.log(chatFromParams);
 
   useEffect(() => {
     scrollToBottom();
