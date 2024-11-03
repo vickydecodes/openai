@@ -1,5 +1,5 @@
 import React from "react";
-import AppRoutes from "./routes.jsx";
+import AppRoutes from "./AppRoutes.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
