@@ -4,8 +4,12 @@
 
 body{
   background-color: #282828;
-  color: white
+  color: white;
+  overflow-y:hidden;
 }
+
+
+
 
 
 
