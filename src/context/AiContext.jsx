@@ -94,6 +94,13 @@ export const AiProvider = ({ children }) => {
     return chats.find((chat) => chat.id === id);
   };
 
+const deleteChat = (id) => {
+setChats(prevChats => {
+return prevChats.filter(chat => chat.id != id)
+})
+
+}
+
   const functions = {
     chats,
     getResponseFromAi,
