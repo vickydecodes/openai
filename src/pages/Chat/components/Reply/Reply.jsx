@@ -12,7 +12,7 @@ export default function Reply({ response, isLastMsg }) {
         <img
           src="/chatgptIcon.png"
           className=""
-          style={{ width: "25px", height: "25px", marginRight: '20px' }}
+          style={{ width: "30px", height: "30px" }}
           alt=""
         />
       </div>
