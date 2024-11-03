@@ -29,12 +29,17 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      const user = localStorage.getItem("user");
+      if (user) {
+        navigate(`/chats/${chats[chats.length - 1].id}`);
+      } else {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
 
-      navigate(`/chats/${chats[chats.length - 1].id}`);
-
-      return user;
+        navigate(`/chats/${chats[chats.length - 1].id}`);
+        localStorage.setItem("user", user);
+        return user;
+      }
     } catch (error) {
       navigate("/");
       console.error("Error during Google login process:", error);
