@@ -45,7 +45,7 @@ export default function Chat() {
 
         <div
           className="chat-container container mb-3 pb-5"
-          style={{ height: "calc(100vh - 120px)", overflow: "auto" }}
+          style={{ height: "calc(100vh - 100px)", overflow: "auto" }}
         >
           {chatFromParams.chats.map((chat, idx) => {
             return (
