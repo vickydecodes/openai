@@ -22,7 +22,8 @@ pre code {
 
 pre,
 code {
-    max-width: 320px;
+    max-width: 600px;
+    width: 100% !important;
     overflow: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
