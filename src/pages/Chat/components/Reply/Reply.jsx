@@ -4,7 +4,7 @@ import { Typewriter } from "react-simple-typewriter";
 import "./Reply.css";
 import { useAiContext } from "../../../../context/AiContext";
 
-export default function Reply({ response }) {
+export default function Reply({ response, isLastMsg }) {
   const { loading } = useAiContext();
   return (
     <div className="mt-4 row d-flex flex-row px-2">
@@ -25,7 +25,7 @@ export default function Reply({ response }) {
             loop={true}
           />{" "}</p> // Display loading message or spinner
         ) : (
-          <MarkDown markdown={response} /> // Render Markdown response
+          <MarkDown markdown={response} isLastMsg={isLastMsg} /> // Render Markdown response
         )}
       </div>
     </div>

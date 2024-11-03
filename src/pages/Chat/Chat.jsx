@@ -53,7 +53,7 @@ export default function Chat() {
             return (
               <div className="fullchat" key={idx}>
                 <Message prompt={chat.prompt} />
-                <Reply response={chat.response} />
+                <Reply response={chat.response} isLastMsg={chat.lastMsg} />
               </div>
             );
           })}

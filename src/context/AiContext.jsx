@@ -50,11 +50,21 @@ export const AiProvider = ({ children }) => {
       const newChat = {
         prompt: userPrompt,
         response: aiResponse,
+        lastMsg: true
       };
-      const updatedChats = [...chat.chats, newChat];
-
+      const updatedChats = chat.chats.map((c, index) => {
+        return {
+          ...c,
+          lastMsg: false 
+        };
+      });
+  
+      updatedChats.push(newChat);
+  
       setChats((prevChats) =>
-        prevChats.map((c) => (c.id === id ? { ...c, chats: updatedChats } : c))
+        prevChats.map((c) =>
+          c.id === id ? { ...c, chats: updatedChats } : c
+        )
       );
     } catch (e) {
       toast.error("Sorry, something went wrong!");
