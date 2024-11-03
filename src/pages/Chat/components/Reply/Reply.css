@@ -1,0 +1,7 @@
+.reply-box{
+    width: fit-content;
+    display: flex;
+    margin-right: auto;
+    margin-top: 20px;
+    text-align: start;
+}

@@ -1,0 +1,27 @@
+#root {
+  height: 100vh;
+}
+
+body{
+  background-color: #282828;
+  color: white
+}
+
+
+
+::-webkit-scrollbar {
+  width: 0px; 
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: grey; 
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

@@ -1,0 +1,18 @@
+code {
+    background-color: #141414;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+pre {
+    background-color: #141414;
+    color: #f8f8f2;
+    padding: 16px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+}

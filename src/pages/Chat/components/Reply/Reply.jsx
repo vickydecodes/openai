@@ -1,0 +1,33 @@
+import React from "react";
+import MarkDown from "../marked/MarkDown";
+import { Typewriter } from "react-simple-typewriter";
+import "./Reply.css";
+import { useAiContext } from "../../../../context/AiContext";
+
+export default function Reply({ response }) {
+  const { loading } = useAiContext();
+  return (
+    <div className="mt-4 row d-flex flex-row px-2">
+      <div className="col-1 d-md-flex justify-content-end">
+        <img
+          src="/chatgptIcon.png"
+          className=""
+          style={{ width: "25px", height: "25px" }}
+          alt=""
+        />
+      </div>
+      <div className="col-11 reply-box">
+        {loading ? (
+          <p> {" "}
+          <Typewriter
+            words={["Loading..........."]}
+            cursorBlinking={true}
+            loop={true}
+          />{" "}</p> // Display loading message or spinner
+        ) : (
+          <MarkDown markdown={response} /> // Render Markdown response
+        )}
+      </div>
+    </div>
+  );
+}
