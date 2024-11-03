@@ -10,8 +10,8 @@ export default function LandingPage() {
       style={{ height: "100%" }}
       className="100vh w-100 d-flex justify-content-center align-items-center"
     >
-      <div className="card custom-card mx-4">
-        <div className="card-body p-4 pt-5">
+      <div className="card custom-card mx-4" >
+        <div className="card-body p-4 py-5 d-flex flex-column justify-content-center align-items-center">
           <h3>Welcome back</h3>
           Log in or sign up to get smarter responses and more.
           <div className="buttons mt-2">
