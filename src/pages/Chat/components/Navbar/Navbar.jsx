@@ -1,20 +1,21 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Navbar.css";
 import { useAiContext } from "../../../../context/AiContext";
 
 export default function Navbar({ username }) {
-  const { chats, newChat } = useAiContext();
+  const { chats, newChat, deleteChat } = useAiContext();
 
   const navigate = useNavigate();
+  const {id} = useParams();
 
   const handleClickForChats = (id) => {
     navigate(`/chats/${id}`);
   };
 
   const handleClearClick = () => {
-    localStorage.clear();
-    navigate('/')
+    deleteChat(id)
+    navigate(`/chats/${chats[chat.length - 1].id}`)
   };
 
   const clearSvg = (
