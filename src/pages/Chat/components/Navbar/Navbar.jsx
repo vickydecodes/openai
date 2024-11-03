@@ -14,6 +14,7 @@ export default function Navbar({ username }) {
 
   const handleClearClick = () => {
     localStorage.clear();
+    navigate('/')
   };
 
   const clearSvg = (
@@ -62,8 +63,8 @@ export default function Navbar({ username }) {
   };
   return (
     <div>
-      <nav className="navbar sticky-top pt-3">
-        <div className="container-fluid row d-sm-flex">
+      <nav className="navbar sticky-top pt-3 w-100 d-flex flex-row justify-content-center align-items-center">
+        <div className="container-fluid row " style={{width: '100%'}}>
           <div className="col-5 d-flex justify-content-start align-items-center">
             <button
               data-bs-toggle="offcanvas"
@@ -77,9 +78,9 @@ export default function Navbar({ username }) {
             >
               {sideBarSvg}
             </button>{" "}
-            <h4 className="heading-1 ms-3">ChatGPT</h4>
+            <h4 className="heading-1 ms-3 d-flex justify-content-center align-items-center">ChatGPT</h4>
           </div>
-          <div className="col-7 d-flex justify-content-end align-items-center">
+          <div className="col-7 d-flex flex-row justify-content-end align-items-center">
             <h5 className="heading-2">{username}</h5>
             <button onClick={handleClearClick} className="ms-3" style={{backgroundColor: 'transparent', border: '0px', color: 'white'}}>{clearSvg}</button>
           </div>

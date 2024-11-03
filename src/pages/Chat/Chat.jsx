@@ -40,7 +40,7 @@ export default function Chat() {
   return (
     <>
     <CustomToast/>
-      <div className="w-100 col-10" style={{ height: "100vh" }}>
+      <div className="w-100 col-10" style={{ height: "100vh", overflowY: 'hidden' }}>
         <Navbar username={currentUser.displayName}/>
 
         <div
