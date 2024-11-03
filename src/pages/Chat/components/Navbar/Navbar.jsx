@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useAiContext } from "../../../../context/AiContext";
 
-export default function Navbar({username}) {
+export default function Navbar({ username }) {
   const { chats, newChat } = useAiContext();
 
   const navigate = useNavigate();
@@ -11,6 +11,24 @@ export default function Navbar({username}) {
   const handleClickForChats = (id) => {
     navigate(`/chats/${id}`);
   };
+
+  const handleClearClick = () => {
+    localStorage.clear();
+  };
+
+  const clearSvg = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      fill="currentColor"
+      className="bi bi-trash"
+      viewBox="0 0 16 16"
+    >
+      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+    </svg>
+  );
 
   const sideBarSvg = (
     <svg
@@ -46,7 +64,7 @@ export default function Navbar({username}) {
     <div>
       <nav className="navbar sticky-top pt-3">
         <div className="container-fluid row d-sm-flex">
-          <div className="col-md-5 d-flex justify-content-start align-items-center">
+          <div className="col-5 d-flex justify-content-start align-items-center">
             <button
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"
@@ -61,8 +79,9 @@ export default function Navbar({username}) {
             </button>{" "}
             <h4 className="heading-1 ms-3">ChatGPT</h4>
           </div>
-          <div className="col-md-7 d-flex justify-content-end align-items-center">
+          <div className="col-7 d-flex justify-content-end align-items-center">
             <h5 className="heading-2">{username}</h5>
+            <button onClick={handleClearClick} className="ms-3" style={{backgroundColor: 'transparent', border: '0px', color: 'white'}}>{clearSvg}</button>
           </div>
         </div>
       </nav>

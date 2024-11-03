@@ -28,6 +28,7 @@ export default function MarkDown({ markdown, isLastMsg }) {
   return (
     <div
       className="markdown-container"
+      
       dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
     />
   );
