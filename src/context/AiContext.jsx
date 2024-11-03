@@ -45,26 +45,30 @@ export const AiProvider = ({ children }) => {
     try {
       const chat = getChatById(id);
       const userPrompt = prompt;
-      const aiResponse = await getGeminiAiResponse(userPrompt);
-      const newChat = {
-        prompt: userPrompt,
-        response: aiResponse,
-        lastMsg: true
-      };
-      const updatedChats = chat.chats.map((c, index) => {
-        return {
-          ...c,
-          lastMsg: false 
+      if (prompt.length > 0) {
+        const aiResponse = await getGeminiAiResponse(userPrompt);
+        const newChat = {
+          prompt: userPrompt,
+          response: aiResponse,
+          lastMsg: true,
         };
-      });
-  
-      updatedChats.push(newChat);
-  
-      setChats((prevChats) =>
-        prevChats.map((c) =>
-          c.id === id ? { ...c, chats: updatedChats } : c
-        )
-      );
+        const updatedChats = chat.chats.map((c, index) => {
+          return {
+            ...c,
+            lastMsg: false,
+          };
+        });
+
+        updatedChats.push(newChat);
+
+        setChats((prevChats) =>
+          prevChats.map((c) =>
+            c.id === id ? { ...c, chats: updatedChats } : c
+          )
+        );
+      } else {
+        return;
+      }
     } catch (e) {
       toast.error("Sorry, something went wrong!");
       navigate("/");
