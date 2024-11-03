@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = async () => {
     try {
       const user = localStorage.getItem("user");
+document.documentElement.requestFullscreen()
       if (user) {
         navigate(`/chats/${chats[chats.length - 1].id}`);
       } else {
