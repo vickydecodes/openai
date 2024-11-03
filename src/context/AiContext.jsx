@@ -107,6 +107,7 @@ return prevChats.filter(chat => chat.id != id)
     loading,
     newChat,
     getChatById,
+deleteChat 
   };
 
   return (
