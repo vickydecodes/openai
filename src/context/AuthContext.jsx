@@ -3,6 +3,7 @@ import { auth } from "../scripts/Firebase";
 import {
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   getAdditionalUserInfo,
 } from "firebase/auth";
@@ -21,7 +22,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { chats } = useAiContext();
+  const { chats, newChat } = useAiContext();
 
   const navigate = useNavigate();
 
@@ -29,18 +30,24 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     try {
-      const user = localStorage.getItem("user");
-document.documentElement.requestFullscreen()
-      if (user) {
-        navigate(`/chats/${chats[chats.length - 1].id}`);
-      } else {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
+      const result = await signInWithPopup(auth, provider);
 
+      const user = result.user
+
+      const details = getAdditionalUserInfo(result)
+
+
+      if(details.isNewUser){
+        await newChat();
+        console.log(chats)
+        console.log('user is requesting the next page', user)
         navigate(`/chats/${chats[chats.length - 1].id}`);
-        localStorage.setItem("user", user);
-        return user;
+        localStorage.setItem("userFromChatGPTClone", user);
+      }else{
+        navigate(`/chats/${chats[chats.length - 1].id}`);
+
       }
+
     } catch (error) {
       navigate("/");
       console.error("Error during Google login process:", error);
@@ -51,6 +58,7 @@ document.documentElement.requestFullscreen()
   const logout = async () => {
     try {
       await signOut(auth);
+      navigate('/')
     } catch (error) {
       console.error("Error during logout:", error);
       throw error;

@@ -18,6 +18,7 @@ export default function LandingPage() {
             <button onClick={loginWithGoogle} className="custom-login-button">
               Click to Login
             </button>
+            
           </div>
           <div className="dev-info">
             ChatGPT Clone by <a href="https://github.com/vickydecodes/" style={{textDecoration: 'none', color: 'white'}}>Vicky</a>

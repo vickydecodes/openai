@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
 import "./Input.css";
+import { useAiContext } from "../../../../context/AiContext";
 
 export default function Input({ handleSubmit }) {
+
+
+  const {loading} = useAiContext();
   const promptRef = useRef();
 
   const handleClick = (e) => {
@@ -55,7 +59,7 @@ export default function Input({ handleSubmit }) {
           id="basic-addon2"
           style={{ borderRadius: "0px 32px 32px 0px" }}
         >
-          <button className="m-1 custom-button" onClick={handleClick}>{sendSvg}</button>
+          <button className="m-1 custom-button" disabled={loading} onClick={handleClick}>{sendSvg}</button>
         </span>
       </div>
     </div>

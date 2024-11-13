@@ -14,6 +14,7 @@ export function useAiContext() {
 }
 
 export const AiProvider = ({ children }) => {
+  const [chat, setChat] = useState(null);
   const [chats, setChats] = useState(() => {
     const savedChats = localStorage.getItem("chatsForChatGPTClone");
     return savedChats
@@ -21,7 +22,7 @@ export const AiProvider = ({ children }) => {
       : [
           {
             id: crypto.randomUUID(),
-            title: "chat 1",
+            title: `chat ${crypto.randomUUID()}`,
             chats: [
               {
                 prompt: "Hey!",
@@ -43,71 +44,87 @@ export const AiProvider = ({ children }) => {
   const getResponseFromAi = async (id, prompt) => {
     setLoading(true);
     try {
-      const chat = getChatById(id);
-      const userPrompt = prompt;
-      if (prompt.length > 0) {
+      const chat = getChatById(id); 
+      const userPrompt = prompt.trim();
+
+      if (userPrompt.length > 0) {
         const aiResponse = await getGeminiAiResponse(userPrompt);
+
         const newChat = {
           prompt: userPrompt,
           response: aiResponse,
           lastMsg: true,
         };
-        const updatedChats = chat.chats.map((c, index) => {
-          return {
-            ...c,
-            lastMsg: false,
-          };
-        });
 
-        updatedChats.push(newChat);
+        if (chat) {
+          const updatedChats = chat.chats
+            .map((message) => ({
+              ...message,
+              lastMsg: false,
+            }))
+            .concat(newChat); 
 
-        setChats((prevChats) =>
-          prevChats.map((c) =>
-            c.id === id ? { ...c, chats: updatedChats } : c
-          )
-        );
-      } else {
-        return;
+          setChats((prevChats) =>
+            prevChats.map((c) => (c.id === id ? { ...c, chats: updatedChats } : c))
+          );
+        }
       }
     } catch (e) {
       toast.error("Sorry, something went wrong!");
       navigate("/");
       console.error("Error fetching response from AI:", e);
-      return "Sorry, something went wrong!";
     } finally {
       setLoading(false);
     }
   };
 
   const newChat = () => {
+    const chatId = crypto.randomUUID();
     const newChat = {
-      id: crypto.randomUUID(),
-      title: `chat ${chats.length + 1}`,
+      id: chatId,
+      title: `chat ${chatId}`,
       chats: [
         { prompt: "Hey!", response: "Hiii! how can I help you Today? :)" },
       ],
     };
     setChats((prevChats) => [...prevChats, newChat]);
+    navigate(`/chats/${chatId}`);
   };
 
   const getChatById = (id) => {
-    return chats.find((chat) => chat.id === id);
+    return  chats.find((chat) => chat.id === id);
   };
 
-const deleteChat = (id) => {
-setChats(prevChats => {
-return prevChats.filter(chat => chat.id != id)
-})
+  const deleteChat = (id) => {
+    try {
+      if (chats.length > 1) {
+        setChats((prevChats) => {
+          return prevChats.filter((chat) => chat.id !== id);
+        });
+        const remainingChats = chats.filter((chat) => chat.id !== id);
+        navigate(`/chats/${remainingChats[remainingChats.length - 1].id}`);
+      } else {
+        toast.error("Sorry, You can't delete!");
+      }
+    } catch (e) {
+      toast.error("An error occured while deleting the chat.");
+      toast.error(error);
+    }
+  };
 
-}
+  useEffect(() => {
+    localStorage.setItem("chatsForChatGPTClone", JSON.stringify(chats));
+  }, [chats]);
 
   const functions = {
+    chat,
+    setChat,
     chats,
     getResponseFromAi,
     loading,
     newChat,
     getChatById,
-deleteChat 
+    deleteChat,
   };
 
   return (

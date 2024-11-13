@@ -2,20 +2,21 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Navbar.css";
 import { useAiContext } from "../../../../context/AiContext";
+import { useAuth } from "../../../../context/AuthContext";
 
 export default function Navbar({ username }) {
   const { chats, newChat, deleteChat } = useAiContext();
+  const { logout } = useAuth();
 
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   const handleClickForChats = (id) => {
     navigate(`/chats/${id}`);
   };
 
   const handleClearClick = () => {
-    deleteChat(id)
-    navigate(`/chats/${chats[chat.length - 1].id}`)
+    deleteChat(id);
   };
 
   const clearSvg = (
@@ -65,8 +66,12 @@ export default function Navbar({ username }) {
   return (
     <div>
       <nav className="navbar sticky-top w-100 d-flex flex-row justify-content-center align-items-center">
-        <div className="container-fluid row mt-4" style={{width: '100%'}}>
-          <div className="col-5 d-flex justify-content-start align-items-center">
+        <div className="container-fluid row mt-4" style={{ width: "100%" }}>
+          <div className="mb-3 text-center d-block d-md-none">
+          <h6 className="heading-2">Chat {id}</h6>
+
+          </div>
+          <div className="col-3  d-flex justify-content-start align-items-center">
             <button
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"
@@ -79,11 +84,26 @@ export default function Navbar({ username }) {
             >
               {sideBarSvg}
             </button>{" "}
-            <h4 className="heading-1 ms-3 d-flex justify-content-center align-items-center">ChatGPT</h4>
+            <h4 className="heading-1 ms-3 d-flex justify-content-center align-items-center">
+              ChatGPT
+            </h4>
           </div>
-          <div className="col-7 d-flex flex-row justify-content-end align-items-center">
+          <div className="col-lg-6 d-none d-md-block d-flex justify-content-center">
+<h5 className="heading-2">Chat {id}</h5>
+          </div>
+          <div className="col-3  d-flex flex-row justify-content-end align-items-center">
             <h5 className="heading-2">{username}</h5>
-            <button onClick={handleClearClick} className="ms-3" style={{backgroundColor: 'transparent', border: '0px', color: 'white'}}>{clearSvg}</button>
+            <button
+              onClick={handleClearClick}
+              className="ms-3"
+              style={{
+                backgroundColor: "transparent",
+                border: "0px",
+                color: "white",
+              }}
+            >
+              {clearSvg}
+            </button>
           </div>
         </div>
       </nav>
@@ -125,6 +145,11 @@ export default function Navbar({ username }) {
             ChatGPT
           </h5>
         </div>
+        <div className="my-1 mx-3">
+          <button onClick={logout} className="custom-login-button">
+            Click to Logout
+          </button>
+        </div>
         <div>
           <h5 className="ms-3">History</h5>
         </div>
@@ -147,7 +172,31 @@ export default function Navbar({ username }) {
                   onClick={() => handleClickForChats(chat.id)}
                   key={idx}
                 >
-                  <div className="card-body">{chat.title}</div>
+                  <div className="card-body d-flex">
+                    <div
+                      className="title"
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {chat.title}
+                    </div>
+                    <div className="ms-auto">
+                      <button
+                        onClick={() => deleteChat(chat.id)}
+                        style={{
+                          background: "transparent",
+                          border: "0px",
+                          color: "white",
+                        }}
+                      >
+                        {" "}
+                        {clearSvg}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               );
             })}

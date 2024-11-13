@@ -1,0 +1,24 @@
+/* Center the loading text */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: white;
+    font-size: 2rem;
+}
+
+
+
+.torch-cursor {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('torch-icon.png');
+    /* Replace with your torch icon image */
+    background-size: cover;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    /* Center the cursor */
+    z-index: 9999;
+}
