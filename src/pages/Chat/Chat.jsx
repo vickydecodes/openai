@@ -11,12 +11,12 @@ import { toast } from "react-toastify";
 import Loading from "./components/Loading/Loading";
 
 export default function Chat() {
-  const {  setChat, getChatById, getResponseFromAi, loading } = useAiContext();
+  const { setChat, getChatById, getResponseFromAi, loading, deleteChat } =
+    useAiContext();
   const { currentUser } = useAuth();
   const messagesEndRef = useRef(null);
 
   const { id } = useParams();
-
 
   const chat = getChatById(id);
 
@@ -45,11 +45,7 @@ export default function Chat() {
     } else {
       console.log("Chat not found!");
     }
-  }, [id, getChatById, setChat]);
-
-  if(loading){
-    <Loading/>
-  }
+  }, [id, getChatById, setChat, deleteChat]);
 
   return (
     <>

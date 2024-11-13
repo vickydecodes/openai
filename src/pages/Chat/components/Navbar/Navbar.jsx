@@ -19,6 +19,12 @@ export default function Navbar({ username }) {
     deleteChat(id);
   };
 
+
+  const handleDeleteForEachChat = (id, event) => {
+    event.stopPropagation(); // Prevent navigation on delete click
+    deleteChat(id)
+  } 
+
   const clearSvg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +191,7 @@ export default function Navbar({ username }) {
                     </div>
                     <div className="ms-auto">
                       <button
-                        onClick={() => deleteChat(chat.id)}
+                        onClick={(e) => handleDeleteForEachChat(chat.id, e)}
                         style={{
                           background: "transparent",
                           border: "0px",
