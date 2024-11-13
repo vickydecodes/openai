@@ -8,7 +8,6 @@ import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "../../context/AuthContext";
 import CustomToast from "./components/toast/Toast";
 import { toast } from "react-toastify";
-import Loading from "./components/Loading/Loading";
 
 export default function Chat() {
   const { setChat, getChatById, getResponseFromAi, loading, deleteChat } =
