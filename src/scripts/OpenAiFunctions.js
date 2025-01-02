@@ -27,8 +27,6 @@ export async function getOpenAIResponse() {
 
 
 
-
-
 export async function getGeminiAiResponse(prompt) {
     const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_AI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
